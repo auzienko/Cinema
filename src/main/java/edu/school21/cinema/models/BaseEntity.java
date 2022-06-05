@@ -1,6 +1,12 @@
 package edu.school21.cinema.models;
 
-public class Entity {
+import javax.persistence.*;
+
+@MappedSuperclass
+public abstract class BaseEntity {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy= GenerationType.AUTO)
     Long id;
 
     public Long getId() {
