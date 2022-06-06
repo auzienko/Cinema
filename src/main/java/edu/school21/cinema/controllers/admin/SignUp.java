@@ -14,11 +14,11 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/signup")
-public class signUp {
+public class SignUp {
     private AdministratorService administratorService;
 
     @Autowired
-    public signUp(AdministratorService administratorService) {
+    public SignUp(AdministratorService administratorService) {
         this.administratorService = administratorService;
     }
 
@@ -32,7 +32,13 @@ public class signUp {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         Optional<Administrator> user = administratorService.signUp(new Administrator(email, password));
-
-        return new ModelAndView("/admin/signup");
+        ModelAndView mv = new ModelAndView();
+        if (user.isPresent()) {
+            mv.setViewName("/admin/panel");
+        } else {
+            mv.addObject("error", "Can't create this user!");
+            mv.setViewName("/admin/signup");
+        }
+        return mv;
     }
 }

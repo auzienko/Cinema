@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/admin/signin")
-public class signIn {
+
+@RequestMapping("/admin/panel")
+public class Panel {
     @GetMapping
     public ModelAndView getPage(){
-        return new ModelAndView("/admin/signin");
+        return new ModelAndView("/admin/panel");
     }
 }

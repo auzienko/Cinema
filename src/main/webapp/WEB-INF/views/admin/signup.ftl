@@ -56,18 +56,18 @@
         <h1 style="text-align: center">SignUp!</h1>
         <hr>
     <table>
-        <tr>
-            <td></td>
-            <td><input name="firstName" placeholder="First name" type="text"/></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input name="lastName" placeholder="Last name" type="text"/></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input name="phoneNumber" placeholder="Phone number" type="text"/></td>
-        </tr>
+<#--        <tr>-->
+<#--            <td></td>-->
+<#--            <td><input name="firstName" placeholder="First name" type="text"/></td>-->
+<#--        </tr>-->
+<#--        <tr>-->
+<#--            <td></td>-->
+<#--            <td><input name="lastName" placeholder="Last name" type="text"/></td>-->
+<#--        </tr>-->
+<#--        <tr>-->
+<#--            <td></td>-->
+<#--            <td><input name="phoneNumber" placeholder="Phone number" type="text"/></td>-->
+<#--        </tr>-->
         <tr>
             <td></td>
             <td><input name="email" placeholder="Email" type="text" required /></td>
@@ -94,5 +94,10 @@
 <#--<%-->
 <#--    }-->
 <#--%>-->
+
+
+<#if error?has_content>
+    <h1 style="text-align: center"><b>${error}</b></h1>
+</#if>
 </body>
 </html>

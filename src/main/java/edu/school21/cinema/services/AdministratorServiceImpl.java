@@ -34,6 +34,12 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     @Override
     public Optional<Administrator> signIn(String email, String password) {
+        Optional<Administrator> tmp = administratorRepository.findByEmail(email);
+        if (tmp.isPresent()) {
+            if (bCryptEncoder.matches(password, tmp.get().getPassword())) {
+                return tmp;
+            }
+        }
         return Optional.empty();
     }
 }
