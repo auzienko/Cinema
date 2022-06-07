@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Transactional
 public class AdministratorRepositoryImpl implements AdministratorRepository {
 
     @PersistenceContext
@@ -38,8 +37,9 @@ public class AdministratorRepositoryImpl implements AdministratorRepository {
     }
 
     @Override
+    @Transactional
     public void save(Administrator entity) {
-        entityManager.merge(entity);
+        entityManager.persist(entity);
     }
 
     @Override

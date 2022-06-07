@@ -11,7 +11,7 @@ public class CinemaWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{CinemaSpringConfig.class};
+        return new Class[]{CinemaWebConfig.class};
     }
 
     @Override

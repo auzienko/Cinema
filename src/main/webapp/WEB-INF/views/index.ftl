@@ -1,8 +1,13 @@
-<html>
-<head><title>Index</title></head>
-<body>
-<h1>Hello admin</h1>
-<a href="/admin/signin">sign In</a><br/>
-<a href="/admin/signup">sign Up</a><br/>
-</body>
-</html>
+<#import "ui.ftl" as ui/>
+<@ui.header title="Welcome to Cinema Admin Panel"/>
+<form action="/admin/signin" method="get">
+    <div class="container">
+        <button type="submit" class="btn">👤 SignIn</button>
+    </div>
+</form>
+<form action="/admin/signup" method="get">
+    <div class="container">
+        <button type="submit" class="btn">👤 SignUp</button>
+    </div>
+</form>
+<@ui.tail/>
