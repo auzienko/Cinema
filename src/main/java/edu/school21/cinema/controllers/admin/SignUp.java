@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,7 @@ public class SignUp {
         ModelAndView mv = new ModelAndView();
         if (user.isPresent()) {
             mv.setViewName("/admin/panel");
+            administratorService.setToSession(req.getSession(), user.get());
         } else {
             mv.addObject("error", "Can't create this user!");
             mv.setViewName("/admin/signup");

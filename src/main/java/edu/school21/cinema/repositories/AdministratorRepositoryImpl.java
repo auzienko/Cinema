@@ -16,6 +16,7 @@ public class AdministratorRepositoryImpl implements AdministratorRepository {
     private EntityManager entityManager;
 
     private static String SQL_FIND_BY_EMAIL = "SELECT a FROM Administrator a WHERE a.email= :email";
+    private static String SQL_FIND_ALL = "SELECT a FROM Administrator a";
 
     @Override
     public Optional<Administrator> findByEmail(String email) {
@@ -27,13 +28,14 @@ public class AdministratorRepositoryImpl implements AdministratorRepository {
     }
 
     @Override
-    public Optional<Administrator> findById(Long Id) {
-        return Optional.empty();
+    public Optional<Administrator> findById(Long id) {
+        Administrator administrator = entityManager.find(Administrator.class, id);
+        return administrator == null ? Optional.empty() : Optional.of(administrator);
     }
 
     @Override
     public List<Administrator> findAll() {
-        return null;
+        return entityManager.createQuery(SQL_FIND_ALL, Administrator.class).getResultList();
     }
 
     @Override
@@ -54,6 +56,9 @@ public class AdministratorRepositoryImpl implements AdministratorRepository {
 
     @Override
     public void delete(Long id) {
-
+        Administrator administrator = entityManager.find(Administrator.class, id);
+        if (administrator != null) {
+            entityManager.remove(administrator);
+        }
     }
 }
