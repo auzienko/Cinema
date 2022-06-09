@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS posters
 (
     id               BIGSERIAL PRIMARY KEY,
     file_name        VARCHAR,
+    file_name_UUID   VARCHAR,
     administrator_id BIGINT
 );
 

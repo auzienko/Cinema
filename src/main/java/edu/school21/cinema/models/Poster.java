@@ -3,6 +3,7 @@ package edu.school21.cinema.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -14,6 +15,9 @@ import javax.persistence.*;
 public class Poster extends BaseEntity{
     @Column(name = "file_name")
     private String fileName;
+
+    @Column(name = "file_name_UUID")
+    private UUID fileNameUUID;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "administrator_id", referencedColumnName = "id")

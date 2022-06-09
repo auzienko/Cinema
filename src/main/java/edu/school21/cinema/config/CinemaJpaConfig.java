@@ -1,7 +1,6 @@
 package edu.school21.cinema.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,9 +15,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -56,9 +52,7 @@ public class CinemaJpaConfig {
         properties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         properties.setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
         properties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-
         em.setJpaProperties(properties);
-
         return em;
     }
 
@@ -66,7 +60,6 @@ public class CinemaJpaConfig {
     public JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-
         return transactionManager;
     }
 
@@ -74,21 +67,4 @@ public class CinemaJpaConfig {
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
-
-//    @Bean
-//    public EntityManagerFactory entityManagerFactory() {
-//        return Persistence.createEntityManagerFactory("cinema");
-//    }
-
-//    @Bean
-//    public EntityManager entityManager() {
-//        return entityManagerFactory().createEntityManager();
-//    }
-//
-//    @Bean
-//    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-//        JpaTransactionManager transactionManager = new JpaTransactionManager();
-//        transactionManager.setEntityManagerFactory(entityManagerFactory);
-//        return transactionManager;
-//    }
 }

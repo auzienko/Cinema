@@ -1,10 +1,13 @@
 <#import "../../ui.ftl" as ui/>
 <@ui.header title="🎞 Films panel"/>
+<#if error?has_content>
+    <h1 style="text-align: center"><b>${error}</b></h1>
+</#if>
 <form method="post" action="films" enctype="multipart/form-data">
     <div class="container">
         <table>
             <tr>
-                <input name="poster" placeholder="Upload poster image" type="file" accept="image/*"
+                <input name="posterFile" placeholder="Upload poster image" type="file" accept="image/*"
                        required/></td>
             </tr>
             <tr>
@@ -31,4 +34,27 @@
         </table>
     </div>
 </form>
+
+<#if movieList?has_content>
+    <div class="container">
+        <table class="minimalistBlack">
+            <thead>
+            <th>id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Age Restriction</th>
+            <th>Year Of Release</th>
+            </thead>
+            <#list movieList as row>
+                <tr>
+                    <td>${row.id}</td>
+                    <td>${row.title}</td>
+                    <td>${row.description}</td>
+                    <td>${row.ageRestrictions}</td>
+                    <td>${row.yearOfRelease}</td>
+                </tr>
+            </#list>
+        </table>
+    </div>
+</#if>
 <@ui.tail/>
