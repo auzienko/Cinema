@@ -1,5 +1,8 @@
 <#import "../../ui.ftl" as ui/>
 <@ui.header title="🍿 Halls panel"/>
+<#if error?has_content>
+    <h1 style="text-align: center"><b>${error}</b></h1>
+</#if>
 <form method="post" action="halls">
     <div class="container">
         <table>
@@ -23,4 +26,23 @@
         </table>
     </div>
 </form>
+
+<#if movieHallList?has_content>
+    <div class="container">
+        <table class="minimalistBlack">
+            <thead>
+            <th>Serial number</th>
+            <th>Seats count</th>
+            </thead>
+            <#list movieHallList as row>
+                <tr>
+                    <td>${row.serialNumber}</td>
+                    <td>${row.seats}</td>
+                </tr>
+            </#list>
+        </table>
+    </div>
+</#if>
+
+
 <@ui.tail/>
