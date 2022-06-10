@@ -40,6 +40,7 @@
         <table class="minimalistBlack">
             <thead>
             <th>id</th>
+            <th>Poster</th>
             <th>Title</th>
             <th>Description</th>
             <th>Age Restriction</th>
@@ -48,10 +49,13 @@
             <#list movieList as row>
                 <tr>
                     <td>${row.id}</td>
+                    <td>
+                        <img src="../../images/${row.poster.fileNameUUID}" width="150" />
+                    </td>
                     <td>${row.title}</td>
                     <td>${row.description}</td>
                     <td>${row.ageRestrictions}</td>
-                    <td>${row.yearOfRelease}</td>
+                    <td>${row.yearOfRelease?replace(",","")}</td>
                 </tr>
             </#list>
         </table>

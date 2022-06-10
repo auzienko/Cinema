@@ -6,14 +6,15 @@ import edu.school21.cinema.models.Poster;
 import edu.school21.cinema.services.AdministratorService;
 import edu.school21.cinema.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -24,11 +25,13 @@ public class Films {
     private final String PAGE_PATH = "/admin/panel/films";
     private AdministratorService administratorService;
     private MovieService movieService;
+    private Environment env;
 
     @Autowired
-    public Films(AdministratorService administratorService, MovieService movieService) {
+    public Films(AdministratorService administratorService, MovieService movieService, Environment env) {
         this.administratorService = administratorService;
         this.movieService = movieService;
+        this.env = env;
     }
 
     @GetMapping
@@ -52,7 +55,7 @@ public class Films {
                                  @RequestParam("title") String title,
                                  @RequestParam("description") String description,
                                  @RequestParam("yearOfRelease") String yearOfRelease,
-                                 @RequestParam("ageRestrictions") String ageRestrictions)  {
+                                 @RequestParam("ageRestrictions") String ageRestrictions) {
         ModelAndView modelAndView = new ModelAndView(PAGE_PATH);
 
         Administrator administrator = administratorService.getFromSession(req.getSession());
@@ -72,7 +75,7 @@ public class Films {
         }
         Integer yOF = null;
         Integer aR = null;
-        try{
+        try {
             yOF = Integer.parseInt(req.getParameter("yearOfRelease"));
             aR = Integer.parseInt(req.getParameter("ageRestrictions"));
         } catch (Exception e) {
@@ -80,11 +83,24 @@ public class Films {
             return modelAndView;
         }
 
-        Poster poster = new Poster(posterFile.getOriginalFilename(), UUID.randomUUID(), administrator);
+        UUID uuid = UUID.randomUUID();
+        try {
+            byte[] barr = posterFile.getBytes();
+            BufferedOutputStream bufferedOutputStream =
+                    new BufferedOutputStream(new FileOutputStream(env.getProperty("storage.path") + "/" + uuid.toString()));
+            bufferedOutputStream.write(barr);
+            bufferedOutputStream.flush();
+            bufferedOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            modelAndView.addObject("error", "❌ Can't save poster!");
+            return modelAndView;
+        }
+        Poster poster = new Poster(posterFile.getOriginalFilename(),
+                uuid, posterFile.getSize(), posterFile.getContentType(), administrator);
         Movie movie = new Movie(title, yOF, aR, description, poster, administrator);
-
-        System.out.println(poster);
-        System.out.println(movie);
+        movieService.add(movie);
+        modelAndView.setViewName("redirect:" + PAGE_PATH);
         return modelAndView;
     }
 }
