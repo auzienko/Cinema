@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Service
 public class AdministratorServiceImpl implements AdministratorService {
-    private final String TOKEN_ID = "cinemaAdmin";
     private final AdministratorRepository administratorRepository;
     private final PasswordEncoder bCryptEncoder;
 
@@ -42,20 +41,5 @@ public class AdministratorServiceImpl implements AdministratorService {
             }
         }
         return Optional.empty();
-    }
-
-    @Override
-    public void setToSession(HttpSession httpSession, Administrator administrator) {
-        httpSession.setAttribute(TOKEN_ID, administrator);
-    }
-
-    @Override
-    public Administrator getFromSession(HttpSession httpSession) {
-        return (Administrator) httpSession.getAttribute(TOKEN_ID);
-    }
-
-    @Override
-    public void removeFromSession(HttpSession httpSession) {
-        httpSession.removeAttribute(TOKEN_ID);
     }
 }

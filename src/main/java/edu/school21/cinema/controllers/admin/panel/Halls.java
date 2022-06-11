@@ -20,22 +20,16 @@ import java.util.Optional;
 public class Halls {
     private final String PAGE_PATH = "/admin/panel/halls";
     private MovieHallService movieHallService;
-    private AdministratorService administratorService;
 
     @Autowired
-    public Halls(MovieHallService movieHallService, AdministratorService administratorService) {
+    public Halls(MovieHallService movieHallService) {
         this.movieHallService = movieHallService;
-        this.administratorService = administratorService;
     }
 
     @GetMapping
     public ModelAndView getPage(HttpServletRequest req) {
         ModelAndView modelAndView = new ModelAndView(PAGE_PATH);
-        Administrator administrator = administratorService.getFromSession(req.getSession());
-        if (administrator == null) {
-            modelAndView.addObject("error", "❌ This page for administrators only!");
-            return modelAndView;
-        }
+        Administrator administrator = AdministratorService.getFromSession(req.getSession());
         List<MovieHall> movieHallList = movieHallService.getAllByAdministratorId(administrator.getId());
         if (movieHallList.size() > 0) {
             modelAndView.addObject("movieHallList", movieHallList);
@@ -46,11 +40,7 @@ public class Halls {
     @PostMapping
     public ModelAndView postPage(HttpServletRequest req) {
         ModelAndView modelAndView = new ModelAndView(PAGE_PATH);
-        Administrator administrator = administratorService.getFromSession(req.getSession());
-        if (administrator == null) {
-            modelAndView.addObject("error", "❌ This action for administrators only!");
-            return modelAndView;
-        }
+        Administrator administrator = AdministratorService.getFromSession(req.getSession());
         Integer serialNumber = null;
         Integer seats = null;
         try {

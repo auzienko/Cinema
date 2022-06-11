@@ -35,8 +35,8 @@ public class SignUp {
         Optional<Administrator> user = administratorService.signUp(new Administrator(email, password));
         ModelAndView mv = new ModelAndView();
         if (user.isPresent()) {
-            mv.setViewName("/admin/panel");
-            administratorService.setToSession(req.getSession(), user.get());
+            mv.setViewName("redirect:/admin/panel");
+            AdministratorService.setToSession(req.getSession(), user.get());
         } else {
             mv.addObject("error", "Can't create this user!");
             mv.setViewName("/admin/signup");

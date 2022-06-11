@@ -33,8 +33,8 @@ public class SignIn {
         Optional<Administrator> user = administratorService.signIn(email, password);
         ModelAndView mv = new ModelAndView();
         if (user.isPresent()) {
-            mv.setViewName("/admin/panel");
-            administratorService.setToSession(req.getSession(), user.get());
+            mv.setViewName("redirect:/admin/panel");
+            AdministratorService.setToSession(req.getSession(), user.get());
         } else {
             mv.addObject("error", "Wrong email or password!");
             mv.setViewName("/admin/signin");

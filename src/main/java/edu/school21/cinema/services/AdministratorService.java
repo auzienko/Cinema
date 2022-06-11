@@ -6,13 +6,21 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public interface AdministratorService {
+    static final String TOKEN_ID = "cinemaAdmin";
+
     Optional<Administrator> signUp(Administrator entity);
 
     Optional<Administrator> signIn(String email, String password);
 
-    void setToSession(HttpSession httpSession, Administrator administrator);
+    static void setToSession(HttpSession httpSession, Administrator administrator) {
+        httpSession.setAttribute(TOKEN_ID, administrator);
+    }
 
-    Administrator getFromSession(HttpSession httpSession);
+    static Administrator getFromSession(HttpSession httpSession) {
+        return (Administrator) httpSession.getAttribute(TOKEN_ID);
+    }
 
-    void removeFromSession(HttpSession httpSession);
+    static void removeFromSession(HttpSession httpSession) {
+        httpSession.removeAttribute(TOKEN_ID);
+    }
 }

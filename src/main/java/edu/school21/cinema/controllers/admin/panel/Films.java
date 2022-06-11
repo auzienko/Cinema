@@ -23,13 +23,11 @@ import java.util.UUID;
 @RequestMapping("/admin/panel/films")
 public class Films {
     private final String PAGE_PATH = "/admin/panel/films";
-    private AdministratorService administratorService;
     private MovieService movieService;
     private Environment env;
 
     @Autowired
-    public Films(AdministratorService administratorService, MovieService movieService, Environment env) {
-        this.administratorService = administratorService;
+    public Films(MovieService movieService, Environment env) {
         this.movieService = movieService;
         this.env = env;
     }
@@ -37,11 +35,7 @@ public class Films {
     @GetMapping
     public ModelAndView getPage(HttpServletRequest req) {
         ModelAndView modelAndView = new ModelAndView(PAGE_PATH);
-        Administrator administrator = administratorService.getFromSession(req.getSession());
-        if (administrator == null) {
-            modelAndView.addObject("error", "❌ This page for administrators only!");
-            return modelAndView;
-        }
+        Administrator administrator = AdministratorService.getFromSession(req.getSession());
         List<Movie> movieList = movieService.getAllByAdministratorId(administrator.getId());
         if (movieList.size() > 0) {
             modelAndView.addObject("movieList", movieList);
@@ -58,12 +52,7 @@ public class Films {
                                  @RequestParam("ageRestrictions") String ageRestrictions) {
         ModelAndView modelAndView = new ModelAndView(PAGE_PATH);
 
-        Administrator administrator = administratorService.getFromSession(req.getSession());
-        if (administrator == null) {
-            modelAndView.addObject("error", "❌ This action for administrators only!");
-            return modelAndView;
-        }
-
+        Administrator administrator = AdministratorService.getFromSession(req.getSession());
         if (title == null) {
             modelAndView.addObject("error", "❌ Title can't be empty!");
             return modelAndView;
