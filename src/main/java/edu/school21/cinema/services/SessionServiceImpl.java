@@ -33,4 +33,9 @@ public class SessionServiceImpl implements SessionService {
     public void add(Session entity) {
         sessionRepository.save(entity);
     }
+
+    @Override
+    public List<Session> searchByTitle(String title) {
+        return sessionRepository.findByTitle(title);
+    }
 }

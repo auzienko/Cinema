@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-@Controller
+@Controller("adminPanelFilms")
 @RequestMapping("/admin/panel/films")
 public class Films {
     private final String PAGE_PATH = "/admin/panel/films";

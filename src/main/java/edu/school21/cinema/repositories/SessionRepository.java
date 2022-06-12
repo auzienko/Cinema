@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface SessionRepository extends CrudRepository<Session> {
     List<Session> getByFilmTitle(String title);
+
+    List<Session> findByTitle(String title);
 }

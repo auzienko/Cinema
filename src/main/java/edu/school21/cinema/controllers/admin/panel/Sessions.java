@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@Controller("adminPanelSessions")
 @RequestMapping("/admin/panel/sessions")
 public class Sessions {
     private final String PAGE_PATH = "/admin/panel/sessions";

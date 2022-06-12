@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@Controller("adminPanelHalls")
 @RequestMapping("/admin/panel/halls")
 public class Halls {
     private final String PAGE_PATH = "/admin/panel/halls";

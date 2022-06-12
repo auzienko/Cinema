@@ -3,13 +3,12 @@ package edu.school21.cinema.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@RequestMapping("/")
-public class Index {
+@RequestMapping("/sessions")
+public class Sessions {
     @GetMapping
-    public String sayHello() {
-        return "index";
+    public String getPage() {
+        return "sessions";
     }
 }

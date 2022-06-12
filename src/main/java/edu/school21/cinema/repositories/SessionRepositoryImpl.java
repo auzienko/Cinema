@@ -1,7 +1,6 @@
 package edu.school21.cinema.repositories;
 
 import edu.school21.cinema.models.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +12,7 @@ import java.util.Optional;
 @Repository
 public class SessionRepositoryImpl implements SessionRepository {
     private static String SQL_FIND_ALL = "SELECT a FROM Session a";
+    private static String SQL_FIND_BY_TITLE = "SELECT a FROM Session a WHERE a.movie.title LIKE :title";
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -54,5 +54,12 @@ public class SessionRepositoryImpl implements SessionRepository {
     @Override
     public List<Session> getByFilmTitle(String title) {
         return null;
+    }
+
+    @Override
+    public List<Session> findByTitle(String title) {
+        return entityManager.createQuery(SQL_FIND_BY_TITLE, Session.class)
+                .setParameter("title", "%" + title + "%")
+                .getResultList();
     }
 }
