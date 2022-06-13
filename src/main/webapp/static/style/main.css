@@ -83,3 +83,15 @@ table.minimalistBlack tfoot {
 table.minimalistBlack tfoot td {
     font-size: 14px;
 }
+
+div.searchItem {
+    padding: 15px;
+    float: left;
+    background: #D5A037;
+    background: -moz-linear-gradient(top, #dfb869 0%, #d9a94b 66%, #D5A037 100%);
+    background: -webkit-linear-gradient(top, #dfb869 0%, #d9a94b 66%, #D5A037 100%);
+    background: linear-gradient(to bottom, #dfb869 0%, #d9a94b 66%, #D5A037 100%);
+    color: white;
+    margin-right: 15px;
+    text-align: center;
+}

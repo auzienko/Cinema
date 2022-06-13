@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public class SessionRepositoryImpl implements SessionRepository {
     private static String SQL_FIND_ALL = "SELECT a FROM Session a";
-    private static String SQL_FIND_BY_TITLE = "SELECT a FROM Session a WHERE a.movie.title LIKE :title";
+    private static String SQL_FIND_BY_TITLE = "SELECT a FROM Session a WHERE lower(a.movie.title) like lower(concat('%',:title, '%'))";
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -59,7 +59,7 @@ public class SessionRepositoryImpl implements SessionRepository {
     @Override
     public List<Session> findByTitle(String title) {
         return entityManager.createQuery(SQL_FIND_BY_TITLE, Session.class)
-                .setParameter("title", "%" + title + "%")
+                .setParameter("title", title)
                 .getResultList();
     }
 }
