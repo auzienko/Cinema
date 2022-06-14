@@ -1,6 +1,11 @@
 /Cinema.iml
+/Cinema
 /.idea/compiler.xml
 /.idea/jarRepositories.xml
 /.idea/
 *.class
 /target/
+.DS_Store
+/src/main/webapp/*
+!style
+!WEB-INF
