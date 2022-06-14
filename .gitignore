@@ -4,3 +4,7 @@
 /.idea/
 *.class
 /target/
+.DS_Store
+/src/main/webapp/*
+!style
+!WEB-INF

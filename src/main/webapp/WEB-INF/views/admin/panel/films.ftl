@@ -57,6 +57,13 @@
                     <td>${row.description}</td>
                     <td>${row.ageRestrictions}</td>
                     <td>${row.yearOfRelease?replace(",","")}</td>
+                    <td>
+                    <form action="/admin/panel/films/${row.id}" method="get">
+                        <div class="container">
+                            <button type="submit" class="btn">👥 Go to chat!</button>
+                        </div>
+                    </form>
+                    </td>
                 </tr>
             </#list>
         </table>

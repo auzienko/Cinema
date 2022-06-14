@@ -43,3 +43,12 @@ CREATE TABLE IF NOT EXISTS sessions
     movie_hall_id    BIGINT,
     administrator_id BIGINT
 );
+
+create table if not exists messages
+(
+    id              bigserial primary key,
+    text            varchar,
+    date            timestamp with time zone default current_timestamp,
+    author_id       bigint references administrators(id),
+    film_id         bigint references movies(id)
+);
