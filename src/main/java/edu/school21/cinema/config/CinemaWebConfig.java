@@ -22,6 +22,15 @@ public class CinemaWebConfig implements WebMvcConfigurer {
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         multipartResolver.setMaxUploadSize(1000000);
+        multipartResolver.setDefaultEncoding("utf-8");
         return multipartResolver;
+    }
+
+    @Bean
+    public org.springframework.web.filter.CharacterEncodingFilter characterEncodingFilter() {
+        org.springframework.web.filter.CharacterEncodingFilter characterEncodingFilter = new org.springframework.web.filter.CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+        return characterEncodingFilter;
     }
 }

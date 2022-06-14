@@ -1,9 +1,10 @@
+<#ftl encoding="utf-8">
 <#import "../../ui.ftl" as ui/>
 <@ui.header title="🎞 Films panel"/>
 <#if error?has_content>
     <h1 style="text-align: center"><b>${error}</b></h1>
 </#if>
-<form method="post" action="films" enctype="multipart/form-data">
+<form method="post" action="films" enctype="multipart/form-data" accept-charset="utf-8">
     <div class="container">
         <table>
             <tr>

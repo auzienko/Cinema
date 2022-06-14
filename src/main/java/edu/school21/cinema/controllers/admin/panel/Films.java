@@ -43,7 +43,7 @@ public class Films {
         return modelAndView;
     }
 
-    @PostMapping
+    @PostMapping()
     public ModelAndView postPage(HttpServletRequest req,
                                  @RequestParam("posterFile") MultipartFile posterFile,
                                  @RequestParam("title") String title,
