@@ -1,11 +1,9 @@
 package edu.school21.cinema.repositories;
 
 import edu.school21.cinema.models.Message;
-import edu.school21.cinema.models.Movie;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import edu.school21.cinema.models.Message;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.PersistenceContext;
@@ -16,7 +14,6 @@ import java.util.Optional;
 @Repository
 public class MessageRepositoryImpl implements MessageRepository{
     private static final String SQL_FIND_ALL = "SELECT a FROM Message a";
-    public static final String FIND_ALL_BY_ID = "SELECT a FROM Message a WHERE a.administrator.id= :administratorId";
     @PersistenceContext
     private EntityManager entityManager;
     @Override
@@ -26,7 +23,8 @@ public class MessageRepositoryImpl implements MessageRepository{
 
     @Override
     public List<Message> findAll() {
-        return null;
+        List<Message> ret = entityManager.createQuery(SQL_FIND_ALL, Message.class).getResultList();
+        return ret;
     }
 
     @Override
@@ -55,14 +53,13 @@ public class MessageRepositoryImpl implements MessageRepository{
 
 
     @Override
-    public List<Message> getChatHistory(Long film_id) {
-        List<Message> msgHistory = null;
-//        List<Message> msgHistory = entityManager
-//                .createQuery("select a from Message where a.movie.id = :f_id  order by a.id desc", Message.class)
-//                .getParameterValue("f_id", film_id)
-//                .setMaxResults(20)
-//                .getResultList();
-//        Collections.reverse(msgHistory);
+    public List<Message> getChatHistory(Long filmId) {
+        List<Message> msgHistory = entityManager
+                .createQuery("select a from Message where a.movie.id = :fId  order by a.id desc", Message.class)
+                .setParameter("fId", filmId)
+                .setMaxResults(20)
+                .getResultList();
+        Collections.reverse(msgHistory);
         return msgHistory;
     }
 }
