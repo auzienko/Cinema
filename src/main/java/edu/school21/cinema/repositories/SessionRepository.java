@@ -5,7 +5,6 @@ import edu.school21.cinema.models.Session;
 import java.util.List;
 
 public interface SessionRepository extends CrudRepository<Session> {
-    List<Session> getByFilmTitle(String title);
 
     List<Session> findByTitle(String title);
 }

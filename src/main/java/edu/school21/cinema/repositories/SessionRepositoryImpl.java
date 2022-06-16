@@ -52,11 +52,6 @@ public class SessionRepositoryImpl implements SessionRepository {
     }
 
     @Override
-    public List<Session> getByFilmTitle(String title) {
-        return null;
-    }
-
-    @Override
     public List<Session> findByTitle(String title) {
         return entityManager.createQuery(SQL_FIND_BY_TITLE, Session.class)
                 .setParameter("title", title)
