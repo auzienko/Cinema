@@ -60,7 +60,6 @@
             margin: auto;
             border-radius: 16px;
             background-color: #CC2CA7
-            /*margin-left: 33%;*/
         }
 
         div.innerChat{
@@ -69,6 +68,7 @@
             max-height: 500px;
             margin: auto;
             overflow: auto;
+            scrollbar-arrow-color: #CC2CA7;
             scrollbar-base-color: #5b5377;
             scrollbar-face-color: #5b5377;
             border-radius: 16px;
@@ -129,7 +129,6 @@
         textElement.className = (message.author.name === "${user.name}") ? 'ownBubble own' : 'otherBubble other';
         textElement.textContent = message.text;
 
-
         messageArea.appendChild(messageElement);
         messageElement.appendChild(container);
         container.appendChild(usernameText);
@@ -140,20 +139,17 @@
         var messageElement = document.createElement('div');
         messageElement.className = 'bubbleWrapper';
         var container = document.createElement('div');
-        if (messageSender === "${user.name}")
-            container.className = 'inlineContainer own';
-        else
-            container.className = 'inlineContainer';
+        container.className = (messageSender === "${user.name}") ? 'inlineContainer own' : 'inlineContainer';
+
         var usernameText = document.createElement('label');
         usernameText.textContent = messageSender;
         if (messageSender === "${user.name}")
             usernameText.hidden = true;
+
         var textElement = document.createElement('div');
-        if (messageSender === "${user.name}")
-            textElement.className = 'ownBubble own';
-        else
-            textElement.className = 'otherBubble other';
-        textElement.textContent = "   " + messageText;
+        textElement.className = (messageSender === "${user.name}") ? 'ownBubble own' : 'otherBubble other';
+        textElement.textContent = messageText;
+
         messageArea.appendChild(messageElement);
         messageElement.appendChild(container);
         container.appendChild(usernameText);
