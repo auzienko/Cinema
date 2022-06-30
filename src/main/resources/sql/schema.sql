@@ -1,13 +1,10 @@
-CREATE TABLE IF NOT EXISTS administrators
-(
-    id               BIGSERIAL PRIMARY KEY,
-    email            VARCHAR,
-    password         VARCHAR
-);
+DROP schema if exists cinema cascade;
+CREATE SCHEMA IF NOT EXISTS cinema;
 
-CREATE TABLE IF NOT EXISTS posters
+CREATE TABLE IF NOT EXISTS cinema.posters
 (
     id               BIGSERIAL PRIMARY KEY,
+    type             INTEGER,
     file_name        VARCHAR,
     size             BIGINT,
     mime             VARCHAR,
@@ -15,7 +12,16 @@ CREATE TABLE IF NOT EXISTS posters
     administrator_id BIGINT
 );
 
-CREATE TABLE IF NOT EXISTS movies
+CREATE TABLE IF NOT EXISTS cinema.administrators
+(
+    id               BIGSERIAL PRIMARY KEY,
+    email            VARCHAR,
+    password         VARCHAR,
+    name             VARCHAR,
+    avatar_id        BIGINT references cinema.posters(id)
+);
+
+CREATE TABLE IF NOT EXISTS cinema.movies
 (
     id               BIGSERIAL PRIMARY KEY,
     title            VARCHAR,
@@ -26,7 +32,7 @@ CREATE TABLE IF NOT EXISTS movies
     administrator_id BIGINT
 );
 
-CREATE TABLE IF NOT EXISTS movie_halls
+CREATE TABLE IF NOT EXISTS cinema.movie_halls
 (
     id               BIGSERIAL PRIMARY KEY,
     serial_number    INTEGER,
@@ -34,7 +40,7 @@ CREATE TABLE IF NOT EXISTS movie_halls
     administrator_id BIGINT
 );
 
-CREATE TABLE IF NOT EXISTS sessions
+CREATE TABLE IF NOT EXISTS cinema.sessions
 (
     id               BIGSERIAL PRIMARY KEY,
     movie_id         BIGINT,
@@ -44,11 +50,11 @@ CREATE TABLE IF NOT EXISTS sessions
     administrator_id BIGINT
 );
 
-create table if not exists messages
+create table if not exists cinema.messages
 (
     id              bigserial primary key,
     text            varchar,
-    date            timestamp with time zone default current_timestamp,
-    author_id       bigint references administrators(id),
-    film_id         bigint references movies(id)
+    date            timestamp,
+    author_id       bigint references cinema.administrators(id),
+    film_id         bigint references cinema.movies(id)
 );

@@ -10,6 +10,9 @@
                 <td><input name="password" placeholder="Password" type="password" required/></td>
             </tr>
             <tr>
+                <td><input name="name" placeholder="Name" type="text" required/></td>
+            </tr>
+            <tr>
                 <td>
                     <button type="Submit" class="btn">Sign me Up</button>
                 </td>

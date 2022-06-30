@@ -9,7 +9,6 @@ import edu.school21.cinema.services.MovieHallService;
 import edu.school21.cinema.services.MovieService;
 import edu.school21.cinema.services.SessionService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 

@@ -44,6 +44,7 @@ public class AdministratorRepositoryImpl implements AdministratorRepository {
         entityManager.persist(entity);
     }
 
+    @Transactional
     @Override
     public void update(Administrator entity) {
         if (entity.getId() != null) {

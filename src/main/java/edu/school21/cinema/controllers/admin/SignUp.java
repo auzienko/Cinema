@@ -32,7 +32,8 @@ public class SignUp {
     public ModelAndView postPage(HttpServletRequest req) {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        Optional<Administrator> user = administratorService.signUp(new Administrator(email, password));
+        String name = req.getParameter("name");
+        Optional<Administrator> user = administratorService.signUp(new Administrator(email, password, name,null));
         ModelAndView mv = new ModelAndView();
         if (user.isPresent()) {
             mv.setViewName("redirect:/admin/panel");
