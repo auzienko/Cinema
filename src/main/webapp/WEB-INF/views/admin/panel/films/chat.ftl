@@ -170,7 +170,7 @@
             <tr>
                 <td>
                     <button type="Submit" id="conBtn" onclick="connect()" class="btn" >Connect </button>
-                    <button type="Submit" id="prfBtn"  onclick="location.href='https://www.w3schools.com/'" class="btn" >Profile </button>
+                    <button type="Submit" id="prfBtn"  onclick="location.href='/admin/profile'" class="btn" >Profile </button>
                 </td>
             </tr>
         </table>

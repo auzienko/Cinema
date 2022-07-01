@@ -58,3 +58,11 @@ create table if not exists cinema.messages
     author_id       bigint references cinema.administrators(id),
     film_id         bigint references cinema.movies(id)
 );
+
+create table if not exists  cinema.user_auth_history
+(
+    id        BIGSERIAL PRIMARY KEY,
+    date_time TIMESTAMP,
+    ip        VARCHAR,
+    user_id   BIGINT references cinema.administrators(id)
+);

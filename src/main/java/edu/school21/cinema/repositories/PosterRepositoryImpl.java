@@ -49,4 +49,10 @@ public class PosterRepositoryImpl implements PosterRepository {
             entityManager.remove(poster);
         }
     }
+
+    @Override
+    public List<Poster> getAllUserAvatars(Long id) {
+        return entityManager.createQuery(SQL_FIND_ALL + " where a.administrator.id = :id " +
+                "and a.type = 2", Poster.class).setParameter("id", id).getResultList();
+    }
 }

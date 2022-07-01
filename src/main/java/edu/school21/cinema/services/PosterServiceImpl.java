@@ -32,4 +32,9 @@ public class PosterServiceImpl implements PosterService {
     public void add(Poster entity) {
         posterRepository.save(entity);
     }
+
+    @Override
+    public List<Poster> getAllAvatars(Long id) {
+        return posterRepository.getAllUserAvatars(id);
+    }
 }

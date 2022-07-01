@@ -50,7 +50,7 @@ public class Films {
     public ModelAndView getPage(HttpServletRequest req) {
         ModelAndView modelAndView = new ModelAndView(PAGE_PATH);
         Administrator administrator = AdministratorService.getFromSession(req.getSession());
-        List<Movie> movieList = movieService.getAllByAdministratorId(administrator.getId());
+        List<Movie> movieList = movieService.getAll();
         if (movieList.size() > 0) {
             modelAndView.addObject("movieList", movieList);
         }
