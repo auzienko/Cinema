@@ -19,7 +19,7 @@ public class CinemaWebConfig implements WebMvcConfigurer {
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(1000000);
+        multipartResolver.setMaxUploadSize(10000000);
         multipartResolver.setDefaultEncoding("utf-8");
         return multipartResolver;
     }

@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public class PosterRepositoryImpl implements PosterRepository {
@@ -54,5 +55,16 @@ public class PosterRepositoryImpl implements PosterRepository {
     public List<Poster> getAllUserAvatars(Long id) {
         return entityManager.createQuery(SQL_FIND_ALL + " where a.administrator.id = :id " +
                 "and a.type = 2", Poster.class).setParameter("id", id).getResultList();
+    }
+
+    @Override
+    public Optional<Poster> getByUUID(UUID fileNameUUID) {
+        Poster poster = entityManager.createQuery("SELECT x FROM Poster x WHERE x.fileNameUUID = ?1", Poster.class )
+   .setParameter( 1, fileNameUUID ).getSingleResult();
+//        List<Poster> poster = entityManager.createQuery("select a from Poster a  where a.fileNameUUID = :UUID", Poster.class)
+//                .setParameter("UUID", fileNameUUID)
+//                .setMaxResults(1)
+//                .getResultList();
+        return poster == null ? Optional.empty() : Optional.of(poster);
     }
 }

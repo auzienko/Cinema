@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PosterServiceImpl implements PosterService {
@@ -36,5 +37,10 @@ public class PosterServiceImpl implements PosterService {
     @Override
     public List<Poster> getAllAvatars(Long id) {
         return posterRepository.getAllUserAvatars(id);
+    }
+
+    @Override
+    public Optional<Poster> findByUUID(UUID UUID) {
+        return posterRepository.getByUUID(UUID);
     }
 }

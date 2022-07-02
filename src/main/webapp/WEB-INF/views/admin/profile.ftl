@@ -20,7 +20,7 @@
                     <td style="width: 100%;">
                         <form action="profile" enctype="multipart/form-data"
                               method="post">
-                            <input type="file" name="newAvatar" class="btn" accept="image/*" required>
+                            <input type="file" name="avatarFile" class="btn" accept="image/*" required>
                             <button type="submit" class="btn">Upload</button>
                         </form>
                     </td>
@@ -82,7 +82,7 @@
                 </thead>
                 <#list avatarHistory as row>
                     <tr>
-                        <td><a href="../../images/${row.fileNameUUID}---${row.fileName}" target="_blank">${row.fileName}</a></td>
+                        <td> <a href="../../images/avatar/${row.fileNameUUID}"  target="_blank">${row.fileName}</a></td>
                         <td>${row.size}</td>
                         <td>${row.mime}</td>
                     </tr>

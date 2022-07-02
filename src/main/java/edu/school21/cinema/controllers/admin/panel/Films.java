@@ -85,7 +85,6 @@ public class Films {
             modelAndView.addObject("error", "❌ Year Of Release and Age Restrictions must be numbers!");
             return modelAndView;
         }
-
         UUID uuid = UUID.randomUUID();
         try {
             byte[] barr = posterFile.getBytes();
@@ -110,42 +109,13 @@ public class Films {
 
     @GetMapping(value = "/{id}/chat")
         public ModelAndView getChat(@PathVariable("id") Long id,HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
         ModelAndView chatMVC = new ModelAndView(PAGE_PATH +  "/chat");
         chatMVC.addObject("movie",  movieService.get(id).get());
         chatMVC.addObject("user", AdministratorService.getFromSession(req.getSession()));
         List<Message> hist = messageService.getHistory(id);
         chatMVC.addObject("history", hist);
-
         return chatMVC;
     }
-
-//    @PostMapping("/{id}/chat")
-//    public ModelAndView postChat(@PathVariable("id") Long id,HttpServletRequest req,
-//                                 @RequestParam("avatarFile") MultipartFile avatarFile) {
-//        ModelAndView modelAndView = new ModelAndView(PAGE_PATH +  "/chat");
-//
-//        Administrator administrator = AdministratorService.getFromSession(req.getSession());
-//        UUID uuid = UUID.randomUUID();
-//        try {
-//            byte[] barr = avatarFile.getBytes();
-//            BufferedOutputStream bufferedOutputStream =
-//                    new BufferedOutputStream(new FileOutputStream(env.getProperty("storage.path") + "/" + uuid.toString()));
-//            bufferedOutputStream.write(barr);
-//            bufferedOutputStream.flush();
-//            bufferedOutputStream.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            modelAndView.addObject("error", "❌ Can't save avatar!");
-//            return modelAndView;
-//        }
-//        Poster avatar = new Poster(avatarFile.getOriginalFilename(), 2,
-//                uuid, avatarFile.getSize(), avatarFile.getContentType(), administrator);
-//        posterService.add(avatar);
-//        administratorService.addAvatar(avatar.getId(), administrator);
-//        modelAndView.setViewName("redirect:" + PAGE_PATH +  "/" + id + "/chat");
-//        return modelAndView;
-//    }
-
-
 }
 
