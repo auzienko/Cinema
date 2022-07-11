@@ -8,9 +8,8 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
-@Table(name = "movies")
+@Table(name = "cinema.movies")
 public class Movie extends BaseEntity {
     @Column(name = "title")
     private String title;
@@ -28,7 +27,7 @@ public class Movie extends BaseEntity {
     @JoinColumn(name = "poster_id", referencedColumnName = "id")
     private Poster poster;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "administrator_id", referencedColumnName = "id")
     private Administrator administrator;
 

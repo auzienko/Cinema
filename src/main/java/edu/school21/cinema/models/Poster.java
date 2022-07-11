@@ -1,6 +1,7 @@
 package edu.school21.cinema.models;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -9,14 +10,17 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
-@Table(name="posters")
+@Table(name="cinema.posters")
 public class Poster extends BaseEntity{
     @Column(name = "file_name")
     private String fileName;
 
-    @Column(name = "file_name_UUID")
+    @Column(name = "type")
+    private Integer type;
+
+    @Column(name = "file_name_UUID", columnDefinition = "BINARY(16)", length = 16 )
+    @Type(type="uuid-char")
     private UUID fileNameUUID;
 
     @Column(name = "size")

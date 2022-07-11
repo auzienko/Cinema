@@ -12,6 +12,10 @@ public interface AdministratorService {
 
     Optional<Administrator> signIn(String email, String password);
 
+    void addAvatar(Long id, Administrator entity);
+
+    Administrator getByEmail(String email);
+
     static void setToSession(HttpSession httpSession, Administrator administrator) {
         httpSession.setAttribute(TOKEN_ID, administrator);
     }
@@ -23,4 +27,5 @@ public interface AdministratorService {
     static void removeFromSession(HttpSession httpSession) {
         httpSession.removeAttribute(TOKEN_ID);
     }
+
 }

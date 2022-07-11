@@ -37,6 +37,8 @@ hr {
     opacity: 0.9;
 }
 
+
+
 .btn:hover {
     opacity: 1;
     cursor: pointer;
@@ -53,6 +55,7 @@ table.minimalistBlack {
     width: 100%;
     text-align: left;
     border-collapse: collapse;
+
 }
 table.minimalistBlack td, table.minimalistBlack th {
     border: 1px solid #000000;
